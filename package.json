@@ -1,0 +1,22 @@
+{
+  "name": "lan-chat",
+  "version": "1.0.0",
+  "description": "局域网聊天服务端",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "pkg server.js --output dist/Server.exe --assets node_modules/sql.js/dist/sql-wasm.wasm",
+    "build:client": "cd client && npx electron-builder --win portable"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "multer": "^1.4.5-lts.1",
+    "sql.js": "^1.11.0",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.1",
+    "pkg": "^5.8.1",
+    "postject": "^1.0.0-alpha.6"
+  }
+}

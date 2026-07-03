@@ -1,0 +1,30 @@
+{
+  "name": "lan-chat-client",
+  "version": "1.0.0",
+  "description": "局域网聊天客户端",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win portable"
+  },
+  "build": {
+    "appId": "lan-chat-client",
+    "productName": "LAN Chat",
+    "directories": {
+      "output": "../dist/Client"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "connect.html"
+    ],
+    "win": {
+      "target": "portable",
+      "icon": null
+    }
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^25.0.0"
+  }
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>连接 - LAN Chat</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, "Microsoft YaHei", sans-serif;
+      height: 100vh; display: flex; align-items: center; justify-content: center;
+      background: #1a1a2e; color: #e0e0e0;
+    }
+    .connect-box {
+      background: #16213e; padding: 32px; border-radius: 12px;
+      border: 1px solid #0f3460; width: 380px;
+    }
+    h1 { font-size: 24px; color: #e94560; text-align: center; margin-bottom: 24px; }
+    .field { margin-bottom: 16px; }
+    label { display: block; font-size: 13px; color: #aaa; margin-bottom: 4px; }
+    input {
+      width: 100%; padding: 10px 12px; border: 1px solid #0f3460;
+      border-radius: 4px; background: #1a1a2e; color: #e0e0e0;
+      font-size: 14px; outline: none;
+    }
+    input:focus { border-color: #e94560; }
+    .hint { font-size: 12px; color: #666; margin-top: 4px; }
+    button {
+      width: 100%; padding: 10px; border: none; border-radius: 4px;
+      background: #e94560; color: #fff; font-size: 15px; cursor: pointer; margin-top: 8px;
+    }
+    button:hover { background: #d63851; }
+    .error { color: #e94560; font-size: 13px; text-align: center; margin-top: 8px; display: none; }
+  </style>
+</head>
+<body>
+  <div class="connect-box">
+    <h1>LAN Chat</h1>
+    <div class="field">
+      <label>服务器地址</label>
+      <input type="text" id="input-ip" placeholder="例如 192.168.1.100" value="127.0.0.1">
+      <div class="hint">运行 Server.exe 的电脑 IP</div>
+    </div>
+    <div class="field">
+      <label>端口</label>
+      <input type="text" id="input-port" placeholder="3000" value="3000">
+    </div>
+    <div class="field">
+      <label>昵称</label>
+      <input type="text" id="input-name" placeholder="输入你的昵称" maxlength="20">
+    </div>
+    <button id="btn-connect">连接到聊天室</button>
+    <div class="error" id="error-msg">请输入有效信息</div>
+  </div>
+  <script>
+    const ipInput = document.getElementById('input-ip');
+    const portInput = document.getElementById('input-port');
+    const nameInput = document.getElementById('input-name');
+    const btnConnect = document.getElementById('btn-connect');
+    const errorMsg = document.getElementById('error-msg');
+
+    btnConnect.addEventListener('click', connect);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Enter') connect(); });
+
+    function connect() {
+      const ip = ipInput.value.trim();
+      const port = portInput.value.trim();
+      const name = nameInput.value.trim();
+      if (!ip || !port || !name) {
+        errorMsg.style.display = 'block';
+        errorMsg.textContent = '请填写所有字段';
+        return;
+      }
+      errorMsg.style.display = 'none';
+      const url = `http://${ip}:${port}/?name=${encodeURIComponent(name)}`;
+      window.location.href = url;
+    }
+  </script>
+</body>
+</html>
