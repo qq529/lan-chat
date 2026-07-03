@@ -5,3 +5,4 @@ chat.db
 *.log
 client/node_modules/
 client/dist/
+AGENTS.md
